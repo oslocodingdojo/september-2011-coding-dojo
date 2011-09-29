@@ -1,0 +1,33 @@
+<html>
+<body>
+<script lang="text/javascript">
+var exports = {};
+</script>
+<script lang="text/javascript" src="game_of_life.js">
+</script>
+
+<canvas id="theCanvas" height="600" width="600"  style='background-color:blue'>
+</canvas>
+
+
+<script lang="text/javascript">
+var context = theCanvas.getContext("2d");
+
+var cell_size = 10;
+var game = new exports.GameOfLife()
+var nextTick = function() {
+  context.clearRect(0, 0, 601, 601);
+  game.draw(function(row, column, has_cell) {
+    if (has_cell) {
+      context.fillRect(row*cell_size, column*cell_size, cell_size, cell_size);
+    }
+  });
+  game.tick();
+  setTimeout(nextTick,500);
+}
+
+nextTick();
+</script>
+
+</body>
+</html>
